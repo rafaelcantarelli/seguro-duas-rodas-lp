@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { ChevronDown, ChevronUp, ArrowRight, Send } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight, Send, ChevronLeft, ChevronRight } from "lucide-react";
 
 const FormularioSeguro = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 6;
+  
   const [formData, setFormData] = useState({
     // Dados do proprietário
     nomeProprietario: "",
@@ -91,17 +94,68 @@ const FormularioSeguro = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="form-container">
-        <div className="form-header">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Solicite a Cotação do Seguro para sua Moto</h1>
-          <p className="text-gray-600 mt-2">Uma parceria PVA</p>
-        </div>
+  const nextStep = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1);
+      window.scrollTo(0, 0);
+    }
+  };
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Seção 1: Dados do Proprietário */}
-          <div className="form-section">
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const getStepTitle = (step: number) => {
+    switch (step) {
+      case 1: return "Dados do Proprietário";
+      case 2: return "Dados do Condutor";
+      case 3: return "Relação e Residência";
+      case 4: return "Dados do Veículo";
+      case 5: return "Dados do Seguro";
+      case 6: return "Contato";
+      default: return "";
+    }
+  };
+
+  const renderStepIndicator = () => {
+    return (
+      <div className="flex items-center justify-between mb-8 w-full max-w-4xl mx-auto">
+        {Array.from({ length: totalSteps }).map((_, index) => (
+          <div key={index} className="flex flex-col items-center">
+            <div 
+              className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                index + 1 === currentStep 
+                  ? 'bg-primary text-white' 
+                  : index + 1 < currentStep 
+                    ? 'bg-gold text-black' 
+                    : 'bg-gray-200 text-gray-500'
+              }`}
+            >
+              {index + 1}
+            </div>
+            <span className={`text-xs mt-2 text-center max-w-[80px] ${
+              index + 1 === currentStep 
+                ? 'text-primary font-medium' 
+                : index + 1 < currentStep 
+                  ? 'text-gold' 
+                  : 'text-gray-500'
+            }`}>
+              {getStepTitle(index + 1)}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <div className="form-section animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">1</span>
               Dados do Proprietário
@@ -166,11 +220,10 @@ const FormularioSeguro = () => {
               </div>
             </div>
           </div>
-          
-          <div className="form-divider"></div>
-          
-          {/* Seção 2: Dados do Condutor */}
-          <div className="form-section">
+        );
+      case 2:
+        return (
+          <div className="form-section animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">2</span>
               Dados do Condutor
@@ -278,11 +331,10 @@ const FormularioSeguro = () => {
               </div>
             </div>
           </div>
-          
-          <div className="form-divider"></div>
-          
-          {/* Seção 3: Relação e Residência */}
-          <div className="form-section">
+        );
+      case 3:
+        return (
+          <div className="form-section animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">3</span>
               Relação e Residência
@@ -410,11 +462,10 @@ const FormularioSeguro = () => {
               </div>
             </div>
           </div>
-          
-          <div className="form-divider"></div>
-          
-          {/* Seção 4: Dados do Veículo */}
-          <div className="form-section">
+        );
+      case 4:
+        return (
+          <div className="form-section animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">4</span>
               Dados do Veículo
@@ -503,11 +554,10 @@ const FormularioSeguro = () => {
               </div>
             </div>
           </div>
-          
-          <div className="form-divider"></div>
-          
-          {/* Seção 5: Dados do Seguro */}
-          <div className="form-section">
+        );
+      case 5:
+        return (
+          <div className="form-section animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">5</span>
               Dados do Seguro
@@ -579,11 +629,10 @@ const FormularioSeguro = () => {
               </div>
             </div>
           </div>
-          
-          <div className="form-divider"></div>
-          
-          {/* Seção 6: Contato */}
-          <div className="form-section">
+        );
+      case 6:
+        return (
+          <div className="form-section animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
               <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">6</span>
               Contato
@@ -617,29 +666,74 @@ const FormularioSeguro = () => {
               </div>
             </div>
           </div>
-          
-          <div className="text-center mt-10">
-            <button 
-              type="submit" 
-              className={`submit-button flex items-center justify-center mx-auto ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Enviando...
-                </>
-              ) : (
-                <>
-                  <Send className="mr-2 h-5 w-5" />
-                  Solicitar Cotação
-                </>
-              )}
-            </button>
-          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderButtons = () => (
+    <div className="flex justify-between mt-8">
+      {currentStep > 1 ? (
+        <button
+          type="button"
+          onClick={prevStep}
+          className="flex items-center px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-all duration-200"
+        >
+          <ChevronLeft className="mr-2 h-5 w-5" />
+          Anterior
+        </button>
+      ) : (
+        <div></div>
+      )}
+      
+      {currentStep < totalSteps ? (
+        <button
+          type="button"
+          onClick={nextStep}
+          className="flex items-center px-6 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-all duration-200 ml-auto"
+        >
+          Próximo
+          <ChevronRight className="ml-2 h-5 w-5" />
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className={`submit-button flex items-center justify-center ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Enviando...
+            </>
+          ) : (
+            <>
+              <Send className="mr-2 h-5 w-5" />
+              Solicitar Cotação
+            </>
+          )}
+        </button>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
+      <div className="form-container">
+        <div className="form-header">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Solicite a Cotação do Seguro para sua Moto</h1>
+          <p className="text-gray-600 mt-2">Uma parceria PVA</p>
+        </div>
+
+        {renderStepIndicator()}
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {renderStep()}
+          {renderButtons()}
         </form>
         
         <div className="text-center mt-8 text-sm text-gray-500">

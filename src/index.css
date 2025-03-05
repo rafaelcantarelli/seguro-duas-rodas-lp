@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -124,5 +125,14 @@
   
   .submit-button {
     @apply bg-success hover:bg-success-dark text-white py-3 px-8 rounded-lg font-medium shadow-sm transition-all duration-300 hover:shadow-md hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  /* Estilos adicionais para o formulário em etapas */
+  .step-indicator {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .step-content {
+    @apply transition-all duration-300 ease-in-out;
   }
 }

@@ -1,4 +1,4 @@
-<lov-code>
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -216,7 +216,7 @@ const FormularioSeguro = () => {
     { value: "AC", label: "Acre" },
     { value: "AL", label: "Alagoas" },
     { value: "AP", label: "Amapá" },
-    { value: "AM", label = "Amazonas" },
+    { value: "AM", label: "Amazonas" },
     { value: "BA", label: "Bahia" },
     { value: "CE", label: "Ceará" },
     { value: "DF", label: "Distrito Federal" },
@@ -916,3 +916,48 @@ const FormularioSeguro = () => {
               Solicitar Cotação
             </>
           )}
+        </button>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header with black background */}
+      <header className="bg-black w-full py-4 px-6">
+        <div className="container mx-auto flex justify-between items-center">
+          <div>
+            <img 
+              src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
+              alt="Seguro Duas Rodas" 
+              className="h-16"
+            />
+          </div>
+          <div className="text-right">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-yellow-400">Solicite a Cotação do Seguro para sua Moto</h1>
+            <p className="text-white text-sm">Uma parceria PVA</p>
+          </div>
+        </div>
+      </header>
+
+      {/* Main content */}
+      <div className="container mx-auto py-10 px-4">
+        <div className="bg-white rounded-lg shadow-lg max-w-5xl mx-auto p-8">
+          {renderStepIndicator()}
+          
+          <form onSubmit={handleSubmit} className="mt-8">
+            {renderStep()}
+            {renderButtons()}
+          </form>
+          
+          <div className="text-center mt-8 text-sm text-gray-500 flex items-center justify-center">
+            <Lock className="h-4 w-4 mr-1 text-yellow-500" />
+            <p>Seus dados estão seguros. Respeitamos sua privacidade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FormularioSeguro;

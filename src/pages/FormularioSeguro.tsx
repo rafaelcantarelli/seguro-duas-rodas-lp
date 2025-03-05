@@ -121,48 +121,38 @@ const FormularioSeguro = () => {
 
   const renderStepIndicator = () => {
     return (
-      <div className="mb-8 w-full max-w-4xl mx-auto overflow-x-auto">
-        {/* Mobile View */}
-        <div className="md:hidden flex items-center justify-center">
-          <div className="flex flex-col items-center">
-            <div className="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center">
-              {currentStep}
-            </div>
-            <span className="text-sm mt-2 text-primary font-medium">
-              {getStepTitle(currentStep)}
-            </span>
-            <span className="text-xs text-gray-500 mt-1">
-              Etapa {currentStep} de {totalSteps}
-            </span>
-          </div>
-        </div>
-        
-        {/* Desktop View */}
-        <div className="hidden md:flex items-center justify-between">
-          {Array.from({ length: totalSteps }).map((_, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <div 
-                className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  index + 1 === currentStep 
-                    ? 'bg-primary text-white' 
-                    : index + 1 < currentStep 
-                      ? 'bg-gold text-black' 
-                      : 'bg-gray-200 text-gray-500'
-                }`}
-              >
-                {index + 1}
+      <div className="mb-8 w-full max-w-4xl mx-auto">
+        <div className="flex justify-between items-center">
+          {Array.from({ length: totalSteps }).map((_, index) => {
+            const stepNumber = index + 1;
+            const isActive = stepNumber === currentStep;
+            const isCompleted = stepNumber < currentStep;
+            
+            return (
+              <div key={index} className="flex flex-col items-center">
+                <div 
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-medium ${
+                    isActive 
+                      ? 'bg-blue-500 text-white' 
+                      : isCompleted 
+                        ? 'bg-yellow-400 text-blue-900' 
+                        : 'bg-gray-200 text-gray-500'
+                  }`}
+                >
+                  {stepNumber}
+                </div>
+                <span className={`text-xs mt-2 text-center max-w-[80px] ${
+                  isActive 
+                    ? 'text-blue-500 font-medium' 
+                    : isCompleted 
+                      ? 'text-blue-900' 
+                      : 'text-gray-500'
+                }`}>
+                  {getStepTitle(stepNumber)}
+                </span>
               </div>
-              <span className={`text-xs mt-2 text-center max-w-[80px] ${
-                index + 1 === currentStep 
-                  ? 'text-primary font-medium' 
-                  : index + 1 < currentStep 
-                    ? 'text-gold' 
-                    : 'text-gray-500'
-              }`}>
-                {getStepTitle(index + 1)}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     );
@@ -173,8 +163,8 @@ const FormularioSeguro = () => {
       case 1:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-              <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">1</span>
+            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+              <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">1</span>
               Dados do Proprietário
             </h2>
             
@@ -241,8 +231,8 @@ const FormularioSeguro = () => {
       case 2:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-              <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">2</span>
+            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">2</span>
               Dados do Condutor
             </h2>
             
@@ -352,8 +342,8 @@ const FormularioSeguro = () => {
       case 3:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-              <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">3</span>
+            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">3</span>
               Relação e Residência
             </h2>
             
@@ -385,7 +375,7 @@ const FormularioSeguro = () => {
                       value="casa" 
                       checked={formData.tipoResidencia === "casa"}
                       onChange={handleRadioChange}
-                      className="mr-2 h-4 w-4 text-primary"
+                      className="mr-2 h-4 w-4 text-blue-500"
                       required
                     />
                     <span>Casa</span>
@@ -398,7 +388,7 @@ const FormularioSeguro = () => {
                       value="condominio"
                       checked={formData.tipoResidencia === "condominio"}
                       onChange={handleRadioChange}
-                      className="mr-2 h-4 w-4 text-primary"
+                      className="mr-2 h-4 w-4 text-blue-500"
                     />
                     <span>Casa em Condomínio</span>
                   </label>
@@ -410,7 +400,7 @@ const FormularioSeguro = () => {
                       value="apartamento"
                       checked={formData.tipoResidencia === "apartamento"}
                       onChange={handleRadioChange}
-                      className="mr-2 h-4 w-4 text-primary"
+                      className="mr-2 h-4 w-4 text-blue-500"
                     />
                     <span>Apartamento</span>
                   </label>
@@ -483,8 +473,8 @@ const FormularioSeguro = () => {
       case 4:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-              <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">4</span>
+            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">4</span>
               Dados do Veículo
             </h2>
             
@@ -575,8 +565,8 @@ const FormularioSeguro = () => {
       case 5:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-              <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">5</span>
+            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">5</span>
               Dados do Seguro
             </h2>
             
@@ -650,8 +640,8 @@ const FormularioSeguro = () => {
       case 6:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-              <span className="bg-primary/10 text-primary w-8 h-8 flex items-center justify-center rounded-full mr-2">6</span>
+            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">6</span>
               Contato
             </h2>
             
@@ -708,7 +698,7 @@ const FormularioSeguro = () => {
         <button
           type="button"
           onClick={nextStep}
-          className="flex items-center px-6 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-all duration-200 ml-auto"
+          className="flex items-center px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 ml-auto"
         >
           Próximo
           <ChevronRight className="ml-2 h-5 w-5" />
@@ -716,7 +706,7 @@ const FormularioSeguro = () => {
       ) : (
         <button
           type="submit"
-          className={`submit-button flex items-center justify-center ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+          className={`flex items-center justify-center px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -739,33 +729,37 @@ const FormularioSeguro = () => {
   );
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-      <header className="sticky top-0 z-50 bg-black shadow-md">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center">
+    <div className="min-h-screen bg-white">
+      {/* Header with black background */}
+      <header className="bg-black w-full py-4 px-6">
+        <div className="container mx-auto flex justify-between items-center">
+          <div>
             <img 
               src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
               alt="Seguro Duas Rodas" 
-              className="h-16 mr-2"
+              className="h-16"
             />
           </div>
-          <div className="flex items-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Solicite a Cotação do Seguro para sua Moto</h1>
-            <p className="text-gray-600 mt-2">Uma parceria PVA</p>
+          <div className="text-right">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-blue-400">Solicite a Cotação do Seguro para sua Moto</h1>
+            <p className="text-white text-sm">Uma parceria PVA</p>
           </div>
         </div>
       </header>
 
-      <div className="form-container">
-        {renderStepIndicator()}
-
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {renderStep()}
-          {renderButtons()}
-        </form>
-        
-        <div className="text-center mt-8 text-sm text-gray-500">
-          <p>Seus dados estão seguros. Respeitamos sua privacidade.</p>
+      {/* Main content */}
+      <div className="container mx-auto py-10 px-4">
+        <div className="bg-white rounded-lg shadow-lg max-w-5xl mx-auto p-8">
+          {renderStepIndicator()}
+          
+          <form onSubmit={handleSubmit} className="mt-8">
+            {renderStep()}
+            {renderButtons()}
+          </form>
+          
+          <div className="text-center mt-8 text-sm text-gray-500">
+            <p>Seus dados estão seguros. Respeitamos sua privacidade.</p>
+          </div>
         </div>
       </div>
     </div>

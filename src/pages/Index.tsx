@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Motorcycle } from "lucide-react";
+import { ArrowRight, Bike } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Index = () => {
         className="text-center max-w-3xl"
       >
         <div className="mb-8 inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10">
-          <Motorcycle className="h-10 w-10 text-primary" />
+          <Bike className="h-10 w-10 text-primary" />
         </div>
         
         <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-600">

@@ -1,7 +1,8 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { ChevronDown, ChevronUp, ArrowRight, Send, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight, Send, ChevronLeft, ChevronRight, Lock } from "lucide-react";
 
 const FormularioSeguro = () => {
   const navigate = useNavigate();
@@ -133,7 +134,7 @@ const FormularioSeguro = () => {
                 <div 
                   className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-medium ${
                     isActive 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'bg-yellow-400 text-blue-900' 
                       : isCompleted 
                         ? 'bg-yellow-400 text-blue-900' 
                         : 'bg-gray-200 text-gray-500'
@@ -143,7 +144,7 @@ const FormularioSeguro = () => {
                 </div>
                 <span className={`text-xs mt-2 text-center max-w-[80px] ${
                   isActive 
-                    ? 'text-blue-500 font-medium' 
+                    ? 'text-yellow-500 font-medium' 
                     : isCompleted 
                       ? 'text-blue-900' 
                       : 'text-gray-500'
@@ -163,7 +164,7 @@ const FormularioSeguro = () => {
       case 1:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
+            <h2 className="text-xl font-semibold text-yellow-700 mb-6 flex items-center">
               <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">1</span>
               Dados do Proprietário
             </h2>
@@ -231,8 +232,8 @@ const FormularioSeguro = () => {
       case 2:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
-              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">2</span>
+            <h2 className="text-xl font-semibold text-yellow-700 mb-6 flex items-center">
+              <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">2</span>
               Dados do Condutor
             </h2>
             
@@ -342,8 +343,8 @@ const FormularioSeguro = () => {
       case 3:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
-              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">3</span>
+            <h2 className="text-xl font-semibold text-yellow-700 mb-6 flex items-center">
+              <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">3</span>
               Relação e Residência
             </h2>
             
@@ -473,8 +474,8 @@ const FormularioSeguro = () => {
       case 4:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
-              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">4</span>
+            <h2 className="text-xl font-semibold text-yellow-700 mb-6 flex items-center">
+              <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">4</span>
               Dados do Veículo
             </h2>
             
@@ -565,8 +566,8 @@ const FormularioSeguro = () => {
       case 5:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
-              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">5</span>
+            <h2 className="text-xl font-semibold text-yellow-700 mb-6 flex items-center">
+              <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">5</span>
               Dados do Seguro
             </h2>
             
@@ -640,8 +641,8 @@ const FormularioSeguro = () => {
       case 6:
         return (
           <div className="form-section animate-fade-in">
-            <h2 className="text-xl font-semibold text-blue-800 mb-6 flex items-center">
-              <span className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full mr-2">6</span>
+            <h2 className="text-xl font-semibold text-yellow-700 mb-6 flex items-center">
+              <span className="bg-yellow-400 text-blue-900 w-8 h-8 flex items-center justify-center rounded-full mr-2">6</span>
               Contato
             </h2>
             
@@ -698,7 +699,7 @@ const FormularioSeguro = () => {
         <button
           type="button"
           onClick={nextStep}
-          className="flex items-center px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 ml-auto"
+          className="flex items-center px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-blue-900 rounded-lg transition-all duration-200 ml-auto"
         >
           Próximo
           <ChevronRight className="ml-2 h-5 w-5" />
@@ -706,7 +707,7 @@ const FormularioSeguro = () => {
       ) : (
         <button
           type="submit"
-          className={`flex items-center justify-center px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+          className={`flex items-center justify-center px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-200 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -741,7 +742,7 @@ const FormularioSeguro = () => {
             />
           </div>
           <div className="text-right">
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-blue-400">Solicite a Cotação do Seguro para sua Moto</h1>
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-yellow-400">Solicite a Cotação do Seguro para sua Moto</h1>
             <p className="text-white text-sm">Uma parceria PVA</p>
           </div>
         </div>
@@ -757,7 +758,8 @@ const FormularioSeguro = () => {
             {renderButtons()}
           </form>
           
-          <div className="text-center mt-8 text-sm text-gray-500">
+          <div className="text-center mt-8 text-sm text-gray-500 flex items-center justify-center">
+            <Lock className="h-4 w-4 mr-1 text-yellow-500" />
             <p>Seus dados estão seguros. Respeitamos sua privacidade.</p>
           </div>
         </div>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { ChevronDown, ChevronUp, ArrowRight, Send, ChevronLeft, ChevronRight, Lock } from "lucide-react";
+import { supabase } from "../integrations/supabase/client";
 
 const FormularioSeguro = () => {
   const navigate = useNavigate();
@@ -75,17 +76,105 @@ const FormularioSeguro = () => {
     setIsSubmitting(true);
     
     try {
-      // Aqui você adicionaria o código para enviar o e-mail
-      // Simulando um envio de dados com um timeout
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Formatação dos dados para envio ao Supabase
+      const cotacaoData = {
+        nome_proprietario: formData.nomeProprietario,
+        cpf_proprietario: formData.cpfProprietario,
+        nascimento_proprietario: formData.nascimentoProprietario,
+        estado_civil_proprietario: formData.estadoCivilProprietario,
+        
+        nome_condutor: formData.nomeCondutor,
+        cpf_condutor: formData.cpfCondutor,
+        nascimento_condutor: formData.nascimentoCondutor,
+        estado_civil_condutor: formData.estadoCivilCondutor,
+        endereco: formData.endereco,
+        cep: formData.cep,
+        estado: formData.estado,
+        
+        relacao_segurador_condutor: formData.relacaoSeguradorCondutor,
+        tipo_residencia: formData.tipoResidencia,
+        garagem_fechada: formData.garagemFechada,
+        local_trabalho: formData.localTrabalho,
+        uso_profissional: formData.usoProfissional,
+        reside_menores: formData.resideMenores,
+        
+        condicao_veiculo: formData.condicaoVeiculo,
+        marca: formData.marca,
+        modelo: formData.modelo,
+        ano: parseInt(formData.ano),
+        chassi: formData.chassi,
+        placa: formData.placa,
+        
+        tipo_seguro: formData.tipoSeguro,
+        seguradora_renovacao: formData.seguradoraRenovacao,
+        data_vencimento: formData.dataVencimento,
+        codigo_interno: formData.codigoInterno,
+        bonus_apolice: formData.bonusApolice,
+        
+        email: formData.email,
+        telefone: formData.telefone,
+        
+        status: "pendente"
+      };
+      
+      // Enviar dados para o Supabase
+      const { error } = await supabase
+        .from("cotacoes_seguro")
+        .insert([cotacaoData]);
+        
+      if (error) {
+        console.error("Erro ao salvar cotação:", error);
+        throw new Error(error.message);
+      }
       
       toast.success("Sua solicitação de cotação foi enviada com sucesso!", {
         description: "Em breve, um de nossos corretores entrará em contato."
       });
       
-      // Redirecionamento após envio bem-sucedido (opcional)
-      // navigate("/sucesso");
+      // Resetar o formulário
+      setFormData({
+        nomeProprietario: "",
+        cpfProprietario: "",
+        nascimentoProprietario: "",
+        estadoCivilProprietario: "",
+        
+        nomeCondutor: "",
+        cpfCondutor: "",
+        nascimentoCondutor: "",
+        estadoCivilCondutor: "",
+        endereco: "",
+        cep: "",
+        estado: "",
+        
+        relacaoSeguradorCondutor: "",
+        tipoResidencia: "",
+        garagemFechada: "",
+        localTrabalho: "",
+        usoProfissional: "",
+        resideMenores: "",
+        
+        condicaoVeiculo: "",
+        marca: "",
+        modelo: "",
+        ano: "",
+        chassi: "",
+        placa: "",
+        
+        tipoSeguro: "",
+        seguradoraRenovacao: "",
+        dataVencimento: "",
+        codigoInterno: "",
+        bonusApolice: "",
+        
+        email: "",
+        telefone: ""
+      });
+      
+      // Voltar para o primeiro passo
+      setCurrentStep(1);
+      
     } catch (error) {
+      console.error("Erro ao processar solicitação:", error);
       toast.error("Ocorreu um erro ao enviar sua solicitação", {
         description: "Por favor, tente novamente mais tarde."
       });

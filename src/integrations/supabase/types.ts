@@ -9,7 +9,114 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      cotacoes_seguro: {
+        Row: {
+          ano: number
+          bonus_apolice: string | null
+          cep: string
+          chassi: string
+          codigo_interno: string | null
+          condicao_veiculo: string
+          cpf_condutor: string
+          cpf_proprietario: string
+          created_at: string
+          data_vencimento: string | null
+          email: string
+          endereco: string
+          estado: string
+          estado_civil_condutor: string
+          estado_civil_proprietario: string
+          garagem_fechada: string
+          id: string
+          local_trabalho: string
+          marca: string
+          modelo: string
+          nascimento_condutor: string
+          nascimento_proprietario: string
+          nome_condutor: string
+          nome_proprietario: string
+          placa: string | null
+          relacao_segurador_condutor: string
+          reside_menores: string
+          seguradora_renovacao: string | null
+          status: string
+          telefone: string
+          tipo_residencia: string
+          tipo_seguro: string
+          uso_profissional: string
+        }
+        Insert: {
+          ano: number
+          bonus_apolice?: string | null
+          cep: string
+          chassi: string
+          codigo_interno?: string | null
+          condicao_veiculo: string
+          cpf_condutor: string
+          cpf_proprietario: string
+          created_at?: string
+          data_vencimento?: string | null
+          email: string
+          endereco: string
+          estado: string
+          estado_civil_condutor: string
+          estado_civil_proprietario: string
+          garagem_fechada: string
+          id?: string
+          local_trabalho: string
+          marca: string
+          modelo: string
+          nascimento_condutor: string
+          nascimento_proprietario: string
+          nome_condutor: string
+          nome_proprietario: string
+          placa?: string | null
+          relacao_segurador_condutor: string
+          reside_menores: string
+          seguradora_renovacao?: string | null
+          status?: string
+          telefone: string
+          tipo_residencia: string
+          tipo_seguro: string
+          uso_profissional: string
+        }
+        Update: {
+          ano?: number
+          bonus_apolice?: string | null
+          cep?: string
+          chassi?: string
+          codigo_interno?: string | null
+          condicao_veiculo?: string
+          cpf_condutor?: string
+          cpf_proprietario?: string
+          created_at?: string
+          data_vencimento?: string | null
+          email?: string
+          endereco?: string
+          estado?: string
+          estado_civil_condutor?: string
+          estado_civil_proprietario?: string
+          garagem_fechada?: string
+          id?: string
+          local_trabalho?: string
+          marca?: string
+          modelo?: string
+          nascimento_condutor?: string
+          nascimento_proprietario?: string
+          nome_condutor?: string
+          nome_proprietario?: string
+          placa?: string | null
+          relacao_segurador_condutor?: string
+          reside_menores?: string
+          seguradora_renovacao?: string | null
+          status?: string
+          telefone?: string
+          tipo_residencia?: string
+          tipo_seguro?: string
+          uso_profissional?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

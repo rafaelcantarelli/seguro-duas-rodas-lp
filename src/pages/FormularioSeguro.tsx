@@ -1,9 +1,9 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { ChevronDown, ChevronUp, ArrowRight, Send, ChevronLeft, ChevronRight, Lock } from "lucide-react";
 import { supabase } from "../integrations/supabase/client";
+import { maskCPF, maskPhone, maskCEP } from "../utils/masks";
 
 const FormularioSeguro = () => {
   const navigate = useNavigate();
@@ -31,7 +31,9 @@ const FormularioSeguro = () => {
     relacaoSeguradorCondutor: "",
     tipoResidencia: "",
     garagemFechada: "",
-    localTrabalho: "",
+    ruaTrabalho: "",
+    cepTrabalho: "",
+    estadoTrabalho: "",
     usoProfissional: "",
     resideMenores: "",
     
@@ -52,15 +54,34 @@ const FormularioSeguro = () => {
     
     // Contato
     email: "",
-    telefone: ""
+    whatsapp: ""
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    
+    // Apply masks based on field name
+    if (name === "cpfProprietario" || name === "cpfCondutor") {
+      setFormData({
+        ...formData,
+        [name]: maskCPF(value)
+      });
+    } else if (name === "whatsapp") {
+      setFormData({
+        ...formData,
+        [name]: maskPhone(value)
+      });
+    } else if (name === "cep" || name === "cepTrabalho") {
+      setFormData({
+        ...formData,
+        [name]: maskCEP(value)
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +115,9 @@ const FormularioSeguro = () => {
         relacao_segurador_condutor: formData.relacaoSeguradorCondutor,
         tipo_residencia: formData.tipoResidencia,
         garagem_fechada: formData.garagemFechada,
-        local_trabalho: formData.localTrabalho,
+        rua_trabalho: formData.ruaTrabalho,
+        cep_trabalho: formData.cepTrabalho,
+        estado_trabalho: formData.estadoTrabalho,
         uso_profissional: formData.usoProfissional,
         reside_menores: formData.resideMenores,
         
@@ -112,7 +135,7 @@ const FormularioSeguro = () => {
         bonus_apolice: formData.bonusApolice,
         
         email: formData.email,
-        telefone: formData.telefone,
+        whatsapp: formData.whatsapp,
         
         status: "pendente"
       };
@@ -149,7 +172,9 @@ const FormularioSeguro = () => {
         relacaoSeguradorCondutor: "",
         tipoResidencia: "",
         garagemFechada: "",
-        localTrabalho: "",
+        ruaTrabalho: "",
+        cepTrabalho: "",
+        estadoTrabalho: "",
         usoProfissional: "",
         resideMenores: "",
         
@@ -167,7 +192,7 @@ const FormularioSeguro = () => {
         bonusApolice: "",
         
         email: "",
-        telefone: ""
+        whatsapp: ""
       });
       
       // Voltar para o primeiro passo
@@ -182,6 +207,37 @@ const FormularioSeguro = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Brazilian states in alphabetical order
+  const brazilianStates = [
+    { value: "AC", label: "Acre" },
+    { value: "AL", label: "Alagoas" },
+    { value: "AP", label: "Amapá" },
+    { value: "AM", label: "Amazonas" },
+    { value: "BA", label: "Bahia" },
+    { value: "CE", label: "Ceará" },
+    { value: "DF", label: "Distrito Federal" },
+    { value: "ES", label: "Espírito Santo" },
+    { value: "GO", label: "Goiás" },
+    { value: "MA", label: "Maranhão" },
+    { value: "MT", label: "Mato Grosso" },
+    { value: "MS", label: "Mato Grosso do Sul" },
+    { value: "MG", label: "Minas Gerais" },
+    { value: "PA", label: "Pará" },
+    { value: "PB", label: "Paraíba" },
+    { value: "PR", label: "Paraná" },
+    { value: "PE", label: "Pernambuco" },
+    { value: "PI", label: "Piauí" },
+    { value: "RJ", label: "Rio de Janeiro" },
+    { value: "RN", label: "Rio Grande do Norte" },
+    { value: "RS", label: "Rio Grande do Sul" },
+    { value: "RO", label: "Rondônia" },
+    { value: "RR", label: "Roraima" },
+    { value: "SC", label: "Santa Catarina" },
+    { value: "SP", label: "São Paulo" },
+    { value: "SE", label: "Sergipe" },
+    { value: "TO", label: "Tocantins" }
+  ];
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
@@ -280,7 +336,9 @@ const FormularioSeguro = () => {
                   name="cpfProprietario" 
                   value={formData.cpfProprietario}
                   onChange={handleInputChange}
-                  className="input-field" 
+                  className="input-field"
+                  maxLength={14}
+                  placeholder="000.000.000-00"
                   required 
                 />
               </div>
@@ -348,7 +406,9 @@ const FormularioSeguro = () => {
                   name="cpfCondutor" 
                   value={formData.cpfCondutor}
                   onChange={handleInputChange}
-                  className="input-field" 
+                  className="input-field"
+                  maxLength={14}
+                  placeholder="000.000.000-00"
                   required 
                 />
               </div>
@@ -405,7 +465,9 @@ const FormularioSeguro = () => {
                   name="cep" 
                   value={formData.cep}
                   onChange={handleInputChange}
-                  className="input-field" 
+                  className="input-field"
+                  maxLength={9}
+                  placeholder="00000-000"
                   required 
                 />
               </div>
@@ -421,9 +483,11 @@ const FormularioSeguro = () => {
                   required
                 >
                   <option value="">Selecione</option>
-                  <option value="SP">SP</option>
-                  <option value="RJ">RJ</option>
-                  <option value="MG">MG</option>
+                  {brazilianStates.map((state) => (
+                    <option key={state.value} value={state.value}>
+                      {state.value} - {state.label}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -514,16 +578,50 @@ const FormularioSeguro = () => {
               </div>
               
               <div>
-                <label htmlFor="localTrabalho" className="input-label">Local de Trabalho *</label>
+                <label htmlFor="ruaTrabalho" className="input-label">Rua do Trabalho *</label>
                 <input 
                   type="text" 
-                  id="localTrabalho" 
-                  name="localTrabalho" 
-                  value={formData.localTrabalho}
+                  id="ruaTrabalho" 
+                  name="ruaTrabalho" 
+                  value={formData.ruaTrabalho}
                   onChange={handleInputChange}
                   className="input-field" 
                   required 
                 />
+              </div>
+              
+              <div>
+                <label htmlFor="cepTrabalho" className="input-label">CEP do Trabalho *</label>
+                <input 
+                  type="text" 
+                  id="cepTrabalho" 
+                  name="cepTrabalho" 
+                  value={formData.cepTrabalho}
+                  onChange={handleInputChange}
+                  className="input-field"
+                  maxLength={9}
+                  placeholder="00000-000"
+                  required 
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="estadoTrabalho" className="input-label">Estado do Trabalho *</label>
+                <select 
+                  id="estadoTrabalho" 
+                  name="estadoTrabalho" 
+                  value={formData.estadoTrabalho}
+                  onChange={handleInputChange}
+                  className="input-field" 
+                  required
+                >
+                  <option value="">Selecione</option>
+                  {brazilianStates.map((state) => (
+                    <option key={`work-${state.value}`} value={state.value}>
+                      {state.value} - {state.label}
+                    </option>
+                  ))}
+                </select>
               </div>
               
               <div>
@@ -638,7 +736,7 @@ const FormularioSeguro = () => {
               </div>
               
               <div>
-                <label htmlFor="placa" className="input-label">Placa (se usado) *</label>
+                <label htmlFor="placa" className="input-label">Placa {formData.condicaoVeiculo === "Usado" ? "*" : "(se usado)"}</label>
                 <input 
                   type="text" 
                   id="placa" 
@@ -750,14 +848,16 @@ const FormularioSeguro = () => {
               </div>
               
               <div>
-                <label htmlFor="telefone" className="input-label">Telefone *</label>
+                <label htmlFor="whatsapp" className="input-label">WhatsApp *</label>
                 <input 
                   type="tel" 
-                  id="telefone" 
-                  name="telefone" 
-                  value={formData.telefone}
+                  id="whatsapp" 
+                  name="whatsapp" 
+                  value={formData.whatsapp}
                   onChange={handleInputChange}
-                  className="input-field" 
+                  className="input-field"
+                  maxLength={15}
+                  placeholder="(00) 00000-0000"
                   required 
                 />
               </div>

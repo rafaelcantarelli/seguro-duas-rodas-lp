@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -741,12 +740,23 @@ const FormularioSeguro = () => {
 
   return (
     <div className="min-h-screen py-12 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="form-container">
-        <div className="form-header">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Solicite a Cotação do Seguro para sua Moto</h1>
-          <p className="text-gray-600 mt-2">Uma parceria PVA</p>
+      <header className="sticky top-0 z-50 bg-black shadow-md">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center">
+            <img 
+              src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
+              alt="Seguro Duas Rodas" 
+              className="h-16 mr-2"
+            />
+          </div>
+          <div className="flex items-center">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Solicite a Cotação do Seguro para sua Moto</h1>
+            <p className="text-gray-600 mt-2">Uma parceria PVA</p>
+          </div>
         </div>
+      </header>
 
+      <div className="form-container">
         {renderStepIndicator()}
 
         <form onSubmit={handleSubmit} className="space-y-8">

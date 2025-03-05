@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Bike } from "lucide-react";
@@ -15,7 +14,7 @@ const TermsOfUse = () => {
             <img 
               src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
               alt="Seguro Duas Rodas" 
-              className="h-12 mr-2" 
+              className="h-16 mr-2" 
             />
           </div>
           <button 
@@ -131,7 +130,7 @@ const TermsOfUse = () => {
               <img 
                 src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
                 alt="Seguro Duas Rodas" 
-                className="h-10 mr-2" 
+                className="h-14 mr-2" 
               />
             </div>
             

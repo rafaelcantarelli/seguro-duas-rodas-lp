@@ -14,6 +14,11 @@ const NotFound = () => {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
+        <img 
+          src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
+          alt="Seguro Duas Rodas" 
+          className="h-16 mx-auto mb-6" 
+        />
         <h1 className="text-6xl font-bold text-yellow-500 mb-4">404</h1>
         <h2 className="text-3xl font-semibold mb-6">Página não encontrada</h2>
         <p className="text-xl text-gray-600 mb-8 max-w-md mx-auto">

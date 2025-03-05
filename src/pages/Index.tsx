@@ -8,7 +8,6 @@ import {
   ThumbsUp, 
   BadgePercent, 
   Phone,
-  Bike,
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
@@ -98,8 +97,11 @@ const Index = () => {
       <header className="sticky top-0 z-50 bg-black shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Bike className="h-8 w-8 text-yellow-500 mr-2" />
-            <span className="text-white font-bold text-xl">Seguro Duas Rodas</span>
+            <img 
+              src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
+              alt="Seguro Duas Rodas" 
+              className="h-12 mr-2" 
+            />
           </div>
           <nav className="hidden md:flex space-x-8">
             <a href="#beneficios" className="text-white hover:text-yellow-500 transition-colors">Benefícios</a>
@@ -322,16 +324,19 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-6 md:mb-0">
-              <Bike className="h-8 w-8 text-yellow-500 mr-2" />
-              <span className="text-white font-bold text-xl">Seguro Duas Rodas</span>
+              <img 
+                src="/lovable-uploads/fcbeae2d-b991-4d88-88c8-b6660a0a8b36.png" 
+                alt="Seguro Duas Rodas" 
+                className="h-10 mr-2" 
+              />
             </div>
             
             <div className="text-gray-400 text-sm text-center md:text-right">
               <p>© {new Date().getFullYear()} Seguro Duas Rodas. Todos os direitos reservados.</p>
               <p className="mt-1">
-                <a href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">Política de Privacidade</a>
+                <a href="/politica-de-privacidade" className="text-gray-400 hover:text-yellow-500 transition-colors">Política de Privacidade</a>
                 {" | "}
-                <a href="#" className="text-gray-400 hover:text-yellow-500 transition-colors">Termos de Uso</a>
+                <a href="/termos-de-uso" className="text-gray-400 hover:text-yellow-500 transition-colors">Termos de Uso</a>
               </p>
             </div>
           </div>

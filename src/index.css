@@ -135,4 +135,39 @@
   .step-content {
     @apply transition-all duration-300 ease-in-out;
   }
+  
+  /* Responsive step indicators */
+  @media (max-width: 768px) {
+    .step-indicator-container {
+      @apply px-2 py-3;
+    }
+    
+    .step-number {
+      @apply w-8 h-8 text-sm;
+    }
+    
+    .step-title {
+      @apply text-xs max-w-[60px];
+    }
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+  
+  .animate-slide-in {
+    animation: slide-in 0.4s ease-out;
+  }
 }

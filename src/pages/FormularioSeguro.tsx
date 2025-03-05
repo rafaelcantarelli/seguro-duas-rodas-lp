@@ -122,31 +122,49 @@ const FormularioSeguro = () => {
 
   const renderStepIndicator = () => {
     return (
-      <div className="flex items-center justify-between mb-8 w-full max-w-4xl mx-auto">
-        {Array.from({ length: totalSteps }).map((_, index) => (
-          <div key={index} className="flex flex-col items-center">
-            <div 
-              className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                index + 1 === currentStep 
-                  ? 'bg-primary text-white' 
-                  : index + 1 < currentStep 
-                    ? 'bg-gold text-black' 
-                    : 'bg-gray-200 text-gray-500'
-              }`}
-            >
-              {index + 1}
+      <div className="mb-8 w-full max-w-4xl mx-auto overflow-x-auto">
+        {/* Mobile View */}
+        <div className="md:hidden flex items-center justify-center">
+          <div className="flex flex-col items-center">
+            <div className="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center">
+              {currentStep}
             </div>
-            <span className={`text-xs mt-2 text-center max-w-[80px] ${
-              index + 1 === currentStep 
-                ? 'text-primary font-medium' 
-                : index + 1 < currentStep 
-                  ? 'text-gold' 
-                  : 'text-gray-500'
-            }`}>
-              {getStepTitle(index + 1)}
+            <span className="text-sm mt-2 text-primary font-medium">
+              {getStepTitle(currentStep)}
+            </span>
+            <span className="text-xs text-gray-500 mt-1">
+              Etapa {currentStep} de {totalSteps}
             </span>
           </div>
-        ))}
+        </div>
+        
+        {/* Desktop View */}
+        <div className="hidden md:flex items-center justify-between">
+          {Array.from({ length: totalSteps }).map((_, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div 
+                className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  index + 1 === currentStep 
+                    ? 'bg-primary text-white' 
+                    : index + 1 < currentStep 
+                      ? 'bg-gold text-black' 
+                      : 'bg-gray-200 text-gray-500'
+                }`}
+              >
+                {index + 1}
+              </div>
+              <span className={`text-xs mt-2 text-center max-w-[80px] ${
+                index + 1 === currentStep 
+                  ? 'text-primary font-medium' 
+                  : index + 1 < currentStep 
+                    ? 'text-gold' 
+                    : 'text-gray-500'
+              }`}>
+                {getStepTitle(index + 1)}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     );
   };

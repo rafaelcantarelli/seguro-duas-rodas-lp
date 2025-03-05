@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import FormularioSeguro from "./pages/FormularioSeguro";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
+import ClientArea from "./pages/ClientArea";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/formulario-seguro" element={<FormularioSeguro />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/cliente" element={<ClientArea />} />
           <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
           <Route path="/termos-de-uso" element={<TermsOfUse />} />
           <Route path="*" element={<NotFound />} />

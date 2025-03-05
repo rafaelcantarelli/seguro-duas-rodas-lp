@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
   
   return (
@@ -22,6 +23,8 @@ const Footer = () => {
               <a href="/politica-de-privacidade" className="text-gray-400 hover:text-yellow-500 transition-colors">Política de Privacidade</a>
               {" | "}
               <a href="/termos-de-uso" className="text-gray-400 hover:text-yellow-500 transition-colors">Termos de Uso</a>
+              {" | "}
+              <a href="/auth" className="text-gray-400 hover:text-yellow-500 transition-colors">Área Admin</a>
             </p>
           </div>
         </div>

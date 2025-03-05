@@ -18,7 +18,7 @@ const Header = () => {
           <a href="#beneficios" className="text-white hover:text-yellow-500 transition-colors">Benefícios</a>
           <a href="#depoimentos" className="text-white hover:text-yellow-500 transition-colors">Depoimentos</a>
           <a href="#contato" className="text-white hover:text-yellow-500 transition-colors">Contato</a>
-          <a href="/auth" className="text-white hover:text-yellow-500 transition-colors">Área Admin</a>
+          <a href="/cliente" className="text-white hover:text-yellow-500 transition-colors">Área do Cliente</a>
         </nav>
         <button 
           onClick={() => navigate("/formulario-seguro")}
